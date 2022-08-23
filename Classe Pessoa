@@ -1,0 +1,15 @@
+class Pessoa() {
+        //Propriedades
+        var nome: String =""
+        var cpf: String =""
+        var idade: Int = 0
+
+fun main() {
+    	var pessoa1 = Pessoa() 
+        pessoa1.nome = "João"
+    	pessoa1.cpf = "11236598825"
+    	pessoa1.idade = 23
+    	println()
+    }
+    
+  }
