@@ -1,0 +1,290 @@
+/**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
+
+
+fun linhaPiramide(espaco: Int, num: Int){
+    print(" ".repeat(espaco))
+    println("$num".repeat(num))
+}
+
+
+fun upper(texto: String): String{
+    var textoNovo = ""
+    textoNovo += texto[0].uppercase()
+    
+    for (indice in 1..(texto.length-1) ){
+        if(texto[indice-1] == ' '){
+        	textoNovo += texto[indice].uppercase()
+        } else {
+            textoNovo += texto[indice]
+        }
+    }
+    
+    return textoNovo
+    
+    
+}
+
+
+/*
+Para cada letra na palavra, 
+você irá calcular um valor associado. 
+
+Este valor será igual ao número que representa a letra vezes a posição da letra na palavra.
+
+O valor associado à palavra será igual à soma dos valores associados a cada uma de suas letras 
+— é esse valor que deve ser retornado.
+*/
+
+fun associaValor(c: Char) : Int {
+    // associar valor à letra. 
+    // Exemplo: 
+    // a -> 1
+    // b -> 2     
+    return 0
+}
+
+fun associaValorPosicao(c: Char, posicao: Int): Int {
+    
+    return associaValor(c)*posicao
+}
+
+fun valorAssociadoFinal(palavra: String) : Int {
+    var soma = 0
+    
+    // para cada letra na palavra calcule associaValorPosicao 
+    // e some à soma
+    // 
+    return soma
+}
+
+
+fun divisaoEuclidiana(Dividendo: Int, divisor: Int) : List<Int> {
+    
+    // 35 : 8  ->
+    // 35 - 8 -> D = 27
+    // q -> 1 
+    // 27 - 8 -> D = 19
+    // q -> 2
+    // 19 - 8 -> D = 11
+    // q -> 3
+    // 11 - 8 -> D = 3
+    // q -> 4 
+    var D = Dividendo
+    var d = divisor
+    var q = 0
+    
+    while(D >= d){
+        D = D - d
+        q = q+1
+    }
+    
+    return listOf<Int>( q, D )
+    
+    
+    
+    
+    
+    
+}
+
+
+
+/*
+class Pessoa{
+    var nome = ""
+    var idade = 0
+    var cpf = ""
+            
+    constructor(){}
+    // Ex.: var pessoa1 = Pessoa()
+    
+    constructor(nome: String, idade: Int){
+        this.nome = nome; this.idade = idade
+    }
+    // Ex.: var pessoa2 = Pessoa("João", 5)
+    
+    constructor(nome: String, idade: Int, cpf: String){
+        this.nome = nome; this.idade = idade; this.cpf = cpf
+    }
+    // Ex.:  var pessoa3 = Pessoa("Maria", 35, "111.222.333-44")
+
+}
+*/
+
+class Produto<T,V> ( var v: V, var t: T){
+    
+    fun printa() = println("t = $t, v= $v")
+}
+
+
+
+
+
+
+
+
+
+/* 
+ * Construa uma classe Pessoa com propriedades nome e sobrenome.
+2 Crie uma classe parente que estende Pessoa e tenha listas
+de descendentes e ascendentes diretos do tipo Pessoa e um
+cˆonjuge do tipo Pessoa.
+3 Crie uma classe fam´ılia com lista de parentes e m´etodos que
+relacionam os parentes da lista
+*/
+
+
+
+
+
+// Desafio 01:
+open class Pessoa(
+    var nome: String = "",
+    var sobrenome: String = ""
+)
+
+class Parente() : Pessoa(){
+    var listaAscendentes: MutableList<Pessoa> = mutableListOf()
+    var listaDescendentes: MutableList<Pessoa> = mutableListOf()
+    var conjuge: Pessoa = Pessoa()
+    
+    constructor(pessoa: Pessoa): this() {
+        this.nome = pessoa.nome
+        this.sobrenome = pessoa.sobrenome
+    }
+}
+
+class Familia {
+    var parentes: MutableList<Parente> = mutableListOf()
+    
+    fun ePai( parentePai: Parente, parenteFilho: Parente  ) : Boolean {
+        parentePai.listaDescendentes.forEach{ pessoa ->
+            if (pessoa.nome == parenteFilho.nome && pessoa.sobrenome == parenteFilho.sobrenome){
+                println("${parentePai.nome} ${parentePai.sobrenome} é pai de ${parenteFilho.nome} ${parenteFilho.sobrenome}")
+                return true
+            }
+        }        
+        return false
+    }
+    
+     fun ePai( parentePai: Pessoa, parenteFilho: Parente  ) : Boolean {
+        parenteFilho.listaAscendentes.forEach{ pessoa ->
+            if (pessoa.nome == parentePai.nome && pessoa.sobrenome == parentePai.sobrenome){
+                println("${parentePai.nome} ${parentePai.sobrenome} é pai de ${parenteFilho.nome} ${parenteFilho.sobrenome}")
+                return true
+            }
+        }        
+        return false
+    }
+    
+    fun eFilho( parenteFilho: Parente, parentePai: Parente ) : Boolean {
+         parenteFilho.listaAscendentes.forEach{ pessoa ->
+            if (pessoa.nome == parentePai.nome && pessoa.sobrenome == parentePai.sobrenome){
+                println("${parenteFilho.nome} ${parenteFilho.sobrenome} é filho de ${parentePai.nome} ${parentePai.sobrenome}")
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    fun eIrmao(parente: Parente, irmao: Parente) : Boolean {
+        
+        parente.listaAscendentes.forEach{ pai -> 
+            if (ePai(pai, irmao)) { 
+                println("${parente.nome} ${parente.sobrenome} é irmão de ${irmao.nome} ${irmao.sobrenome}")
+            	return true
+            }
+        }
+        return false
+    }
+    
+    
+}
+
+/*
+ * var joaoPessoa = Pessoa("João", "Silva")
+    var pedroPessoa = Pessoa("Pedro", "Silva")
+    var simonPessoa = Pessoa("Simon", "Assagra")
+    
+    var joaoParente = Parente(joaoPessoa)   // pai
+    var pedroParente = Parente(pedroPessoa) // filho
+    var simonParente = Parente(simonPessoa) // irmão de Pedro
+    
+    joaoParente.listaDescendentes.add(pedroPessoa)
+    joaoParente.listaDescendentes.add(simonPessoa)
+
+    pedroParente.listaAscendentes.add(joaoPessoa)
+
+    simonParente.listaAscendentes.add(joaoPessoa)
+
+    var familia = Familia()
+    familia.parentes.add(joaoParente)
+    familia.parentes.add(pedroParente)
+    familia.parentes.add(simonParente)
+    
+    familia.ePai(joaoParente, pedroParente ) 
+    familia.eFilho(pedroParente, joaoParente ) 
+    familia.eIrmao(pedroParente, simonParente )
+*/
+
+open class Usuario(
+    var nome :String = "",
+    var sobrenome:String = "",
+    var email:String = "",
+    var senha:String = ""
+)
+
+open class Funcionario() : Usuario(){
+    var cargo = ""
+    var salario = 0.0
+}
+
+class Gerente() : Funcionario(){
+    var senhaGerente = ""
+}
+
+class Loja (){
+    var listaFuncionarios: MutableList<Funcionario> = mutableListOf()
+    
+    fun darDesconto(gerente: Gerente, senha: String, preco: Double,  desconto: Double): Double {
+        
+        if( gerente.senhaGerente == senha) {
+            println("Desconto concedido. Foi  de R$ ${"%.2f".format(preco)} para R$ ${"%.2f".format(preco - desconto)}")
+            return preco - desconto
+        }
+        
+        println("Desconto não concedido.\nValor se mantem R$ ${"%.2f".format(preco)} ")
+        
+        return preco
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+fun main() {
+        
+    var germano = Gerente()
+    
+    germano.senhaGerente = "123456"
+    
+    var lojaGermano = Loja()
+    
+    lojaGermano.darDesconto(germano, "123456", 583.00, 300.00) 
+    
+    var formato = "%.2f"
+    var valorFormatado = formato.format(3523.0)
+    println(valorFormatado)
+    
+}
