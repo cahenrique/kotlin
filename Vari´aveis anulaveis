@@ -1,0 +1,19 @@
+fun main() {
+    var idadeJoao: Int = 18 
+    var idadePedro: Int = 16
+    val idadeRafael = 12
+    
+    var idade: Int? = null
+    
+    	if (	idade != null) {
+    	println("idade: $(idade)")
+			} else { 
+            println("idade não informada")
+	} 
+    
+    idade = idadeRafael
+   		if (idade != null) { println("Idade: ${idade}")
+    		} else {
+        	println("idade não informada")
+    } 
+}
